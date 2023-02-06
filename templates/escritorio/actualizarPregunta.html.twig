@@ -1,0 +1,12 @@
+{% extends 'base-panel.html.twig' %}
+{% form_theme formActualizarPregunta 'bootstrap_5_layout.html.twig' %}
+{% block main %}
+<div class="g-0 row">
+      <div class="container mt-4">
+        <h2>Modificar pregunta</h2>
+        <p>En este apartado podrás <b>modificar</b> las respuestas o preguntas de tus usuarios. 
+          {{form(formActualizarPregunta)}}
+      </div>
+    </main>
+</div>
+{% endblock %}

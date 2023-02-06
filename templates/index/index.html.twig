@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Patronate.eu
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="banner-portada">
+  <div class="container">
+		<div class="row grid-center align-items-center">
+			<div class="col-lg-6 col-sm-12">
+				<p class="subtitulo">Patrónate</p>
+				<h1>La primera escuela online dónde realizar
+					<b>patrones a tu medida</b>.</h1>
+
+				{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+					<a class="btn btn-outline-secondary" href="/user">Accede a los cursos</a>
+				{% else %}
+					<div class="btn-group">
+						<a class="btn btn-outline-secondary" href="/registro">Regístrate</a>
+						<a class="btn btn-outline-secondary" href="/login">Loguéate</a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-sm-12 border-dashed">
+				<p class="subtitulo">¿Qué es esto?</p>
+				<h2>Manifiesto</h2>
+				<p>¿Te gustaría combatir los cánones de belleza? En Patrónate seguimos la filosofía body-positive, por ello damos rienda suelta para que puedas crear la ropa a tu medida. La moda no tiene género, talla ni condición. ¿Has pensado alguna vez realizar ropa a tu medida?
+				</p>
+				<p>
+					Haz ropa por y para tí. Escapa de las tendencias y realiza ropa de calidad escapando del fast fashion. Somos una escuela online dónde aprender y realizar algo nuevo.</p>
+			</div>
+			<div class="col-md-6 col-sm-12">
+				<div class="overlap">
+					<img class="image1" src="{{ upload_dir }}2.jpg" alt="">
+					<img class="image2" src="{{ upload_dir }}9.jpg" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="bg-patron1">
+	<div class="container ">
+		<div class="steps">
+			<div class="titulo">
+				<p class="subtitulo">¿Cómo registrarme?</p>
+				<h2>Solo sigue estos pasos</h2>
+			</div>
+			<ol>
+				<li>Te registras</li>
+				<li>Te apuntas al curso de la prenda intereda</li>
+				<li>Sigues nuestros tutoriales y descargas los patrones</li>
+				<li>Fardas de prenda molona</li>
+			</ol>
+		</div>
+	</div>
+</section>
+<section>
+	<div class="container">
+		<p class="subtitulo">¿Qué prendas puedo hacer?</p>
+		<h2 class="mb-5">Nuestros Cursos</h2>
+	</div>
+	<ul class="ult-cursos">
+
+		{% for curso in cursos %}
+			<li class="miniatura">
+				<h3>{{curso.titulo}}</h3>
+				<div class="degradado"></div>
+				<img src='{{ upload_dir }}uploads/miniaturas/{{curso.imagen}}'>
+			</li>
+		{% endfor %}
+	</ul>
+
+</section>
+<section>
+	<div class="container" id="icon-grid">
+		<p class="subtitulo">¿Por qué escogernos?</p>
+		<h2 class="pb-2">8 razones que te convencerán</h2>
+
+		<div class="row valores row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 py-5">
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">speed</span>
+				<div>
+					<h5 class="mb-0">Aprende a tu rítmo</h5>
+					<p>Disfruta aprendiendo en casa, sin horarios y a tu ritmo. Tu decides cuando continuar el aprendizaje.</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">local_convenience_store</span>
+				<div>
+					<h5 class="mb-0 ">Disponible las 24 horas</h5>
+					<p>Podrás formarte a la hora que tú prefieras. Disponible las 24 horas del días los 365 días del año.</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">star</span>
+				<div>
+					<h5 class="mb-0">Avalado por expertos</h5>
+					<p>Detrás de la plataforma te encontrarás con expertos que te ayudarán con todas las dudas que te surjan.</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">
+					design_services
+				</span>
+				<div>
+					<h5 class="mb-0">Prendas a tu medida</h5>
+					<p>Gracias a nuestros generador de patornes online, realizarás patrones hechos a tu figura.</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">image</span>
+				<div>
+					<h5 class="mb-0 ">Muestra tus procesos</h5>
+					<p>A través de nuestra comunidad online podrás publicar tus procesos. ¡Múestrale al mundo tus avances!</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">smart_display</span>
+				<div>
+					<h5 class="mb-0 ">En vídeo y con trucos</h5>
+					<p>Reproduce nuestros videotutoriales las veces que necesites. En ellos te indicaremos trucos para mejoras</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">
+					follow_the_signs
+				</span>
+				<div>
+					<h5 class="mb-0 ">Sin conocimientos previos</h5>
+					<p>Arrancaremos desde lo más básico. No es necesario que poseas conocimientos previos en costura</p>
+				</div>
+			</div>
+			<div class="col d-flex align-items-start">
+				<span class="material-symbols-outlined">accessible</span>
+				<div>
+					<h5 class="mb-0 ">Completamente accesibles</h5>
+					<p>Nuestros cursos son sencillos y están adaptados y preparados para todo tipo de necesidades. Pensamos en la accesibilidad.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>{% endblock %}
+

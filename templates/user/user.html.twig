@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usuario | Patrónate{% endblock %}
+
+{% block body %}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-8 col-md-9 mx-auto">
+        <h1>Mis cursos</h1>
+        <p class="lead text-muted">En esta pantalla podrás ver todos los cursos que ofrecemos en <b>Patrónate</b>. Si quieres anotarte a alguno, solamente tienes que pulsar el botón y esperar a que te deamos acceso. Te enviares un email conforme tienes operativo el curso.</p>
+        <p>
+        <a href="/medidas" class="btn btn-primary my-2">Mis medidas</a>
+        {% if is_granted('ROLE_ADMIN') %}
+                <a href="/escritorio" class="btn btn-secondary my-2">Escritorio</a>
+        {% endif %}
+        
+        </p>
+      </div>
+    </div>
+  </section>
+
+<div class="container">
+<div class="cursos">
+ 
+{% for curso in cursos %}
+        <div class="col">
+          <div class="card">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{ upload_dir }}uploads/miniaturas/{{curso.imagen}}" >
+            <div class="card-body">
+            <h4>{{curso.titulo}}</h4>
+              {{curso.descripcion|raw}}
+              <div class="d-flex justify-content-between align-items-center">
+              {% set existe = false %} 
+                {% for cursoUsuario in usuario.cursosCostura %}
+                  {% if cursoUsuario.getid == curso.id %} 
+                    {% set existe = true %}  
+                  {% endif %}
+                {% endfor %} 
+
+                {% if existe == true %}
+                <div class="btn-group">
+                  <a  class="btn btn-sm btn-outline-secondary" href="/patron/{{curso.titulo|lower}}/pdf"><i class="fas fa-download"></i> patrón</button>
+                  <a class="btn btn-sm btn-outline-secondary" href="curso/{{curso.id}}">Acceder</a>
+                </div>
+                {% else %}
+                <a href="/anotarse/{{curso.id}}/{{app.user.id}}" class="btn btn-sm btn-outline-secondary">Anotarme al curso</a>
+                 {% endif %} 
+                 
+                <small class="text-muted">{{curso.dificultad}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+</div>
+
+{% endblock %}

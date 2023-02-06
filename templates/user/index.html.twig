@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% form_theme registration_form 'bootstrap_5_layout.html.twig' %}
+{% block title %}Registro | Patrónate{% endblock %}
+
+{% block body %}
+<div class="container mt-5 registro text-center">
+
+<div class="row">
+<div class = "col-lg-4 col-sm-6 col-xs-12 mx-auto">
+<h2>Registro</h2>
+<p class="mb-4">Registráte en la plataforma para pdoer acceder a los cursos y poder descargárte patrones a medida sólo para ti.</p>
+    {{form(registration_form)}}
+    </div>
+    </div>
+    </div>
+{% endblock %}

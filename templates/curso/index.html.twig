@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+{% form_theme formulario 'bootstrap_5_layout.html.twig' %}
+{% block title %}
+	{{datos.titulo}}
+{% endblock %}
+
+{% block body %}
+	{% set Acceso = false %}
+	{% for curso in app.user.cursosCostura %}
+		{% if curso.id == datos.id %}
+			{% set Acceso = true %}
+		{% endif %}
+	{% endfor %}
+	{% if Acceso == true %}
+		<style>
+			.example-wrapper {
+				margin: 1em auto;
+				max-width: 800px;
+				width: 95%;
+				font: 18px / 1.5 sans-serif;
+			}
+			.example-wrapper code {
+				background: #F5F5F5;
+				padding: 2px 6px;
+			}
+		</style>
+		<header class="text-center curso-imagen" style="background-image:url({{ upload_dir }}uploads/miniaturas/{{datos.imagen}})">
+			<div class="row-fluid">
+				<div class="col-lg-6 col-md-8 mx-auto py-5">
+					<h1>{{datos.titulo}}</h1>
+					{{datos.descripcion|raw}}
+					<p>
+						<a href="/medidas" class="btn btn-primary my-2">Introducir medidas</a>
+						<a href="/user" class="btn btn-secondary my-2">Volver a los cursos</a>
+					</p>
+				</div>
+			</div>
+		</header>
+
+		<div class="example-wrapper">
+			<div class="row g-5">
+				<div class="col-md-8">
+					{% set articles = {
+        'article-1': {
+          'texto': datos.ud1,
+          'video': datos.video1,
+        },
+        'article-2': {
+          'texto': datos.ud2,
+          'video': datos.video2,
+        },
+        'article-3': {
+          'texto': datos.ud3,
+          'video': datos.video3,
+        },
+        'article-4': {
+          'texto': datos.ud4,
+          'video': datos.video4,
+        },
+        'article-5': {
+          'texto': datos.ud5,
+          'video': datos.video5,
+        },
+    }
+     %}
+
+
+					{% for article in articles %}
+						{% if article.texto != null %}
+							<article id="ud{{loop.index}}" class="mt-4">
+								<h2 class="blog-post-title mb-1">Unidad
+									{{loop.index}}</h2>
+								{{article.texto | raw}}
+								<div class="ratio ratio-16x9">
+									<iframe src="https://www.youtube.com/embed/{{article.video}}
+																				    title=" youtube video"
+																				    allowfullscreen
+																				  ></iframe>
+																				</div>
+																				      </article>
+																				      {% endif %}
+																				{% endfor %}
+										
+																				    </div>
+										
+																				    <div class=" col-md-4">
+										<div class="position-sticky" style="top: 2rem;">
+											<div class="p-4 mb-3 bg-light rounded">
+												<h4>Unidades</h4>
+												<ol class="list-unstyled mb-0">
+													{% for article in articles %}
+														{% if article.texto != null %}
+															<li>
+																<a href="#ud{{loop.index}}">Unidad
+																	{{loop.index}}</a>
+															</li>
+														{% endif %}
+													{% endfor %}
+												</ol>
+												<a class="btn btn-primary mt-2" href="/patron/{{datos.titulo|lower}}/pdf">Descargar patrones</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<section class="py-5 text-center bg-primary">
+								<div class="container">
+									<div class=" mx-auto">
+										<h2 class="fw-light text-light">Formulario de contacto</h2>
+										<p class="text-light">Si te surge cualquier duda a lo largo del curso, no dudes en contactar a través del siguiente formulario.</p>
+										{{form(formulario)}}
+										</div>
+										{% if consultas != null %}
+											<hr class="mt-4">
+											<h2 class="fw-light text-light mb-3">Preguntas anteriores</h2>
+                      <div class="text-start">
+											{% for consulta in consultas %}
+												<p class="text-light">{{consulta.pregunta}}</p>
+												{% if consulta.respuesta != null %}
+													<p class="text-gray pl-4">{{consulta.respuesta}}</p>
+												{% endif %}
+											{% endfor %}
+										{% endif %}
+									</div>
+								</section>
+							{% else %}
+								{% include 'acceso.html.twig' %}
+							{% endif %}
+						{% endblock %}

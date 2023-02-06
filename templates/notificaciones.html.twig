@@ -1,0 +1,7 @@
+
+{% block body %}
+{% if notificaciones|length > 0 %}
+ <small class="badge badge-primary bg-danger">{{notificaciones | length}}</small>
+  <small class="sr-only">solicitudes sin revisar</small>
+  {% endif %}
+{% endblock %}

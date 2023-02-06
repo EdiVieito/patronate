@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark pt-4">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                <span class="fs-5 d-none d-sm-inline text-light">Escritorio</span>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <a href="/escritorio" class="nav-link align-middle px-0">
+                            <i class="fas fa-university"></i>
+ <span class="ms-1 d-none d-sm-inline">Cursos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/escritorio/usuarios" class="nav-link align-middle px-0">
+                            <i class="fas fa-users"></i>
+<span class="ms-1 d-none d-sm-inline">Usuarios</span>
+
+   {{render('notificaciones')}}
+
+
+ </a>
+                    </li>
+                     <li class="nav-item">
+                        <a href="/escritorio/preguntas" class="nav-link align-middle px-0">
+                            <i class="fas fa-question"></i>
+ <span class="ms-1 d-none d-sm-inline">Preguntas</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col py-3">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
